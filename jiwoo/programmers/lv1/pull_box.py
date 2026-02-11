@@ -23,3 +23,17 @@ def solution(n, w, num):
         else:
             answer = total_rows - row
     return answer
+
+# 개선 버전 (with AI)
+def solution1(n, w, num):
+    total_rows = (n + w - 1) // w
+    row = (num - 1) // w
+    pos = (num - 1) % w
+    order = (w - 1 - pos) if row % 2 else pos
+
+    top_row = total_rows - 1
+    top_count = n - top_row * w  # 꼭대기 층 상자 수
+    top_pos = (w - 1 - order) if top_row % 2 else order
+
+    covered = top_pos < top_count
+    return total_rows - row if covered else total_rows - row - 1
